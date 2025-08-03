@@ -34,11 +34,7 @@ int main() {
     Color menuBackgroundColor = BLACK;
     Color pvpBackgroundColor = (Color){50, 0, 50, 255}; // Dark Purple for PvP
     Color pvcBackgroundColor = (Color){0, 60, 60, 255}; // Dark Teal for PvC
-    Color settingsBackgroundColor = (Color){128, 0, 128, 255}; // Purple
-    Color gameOverBackgroundColor = (Color){139, 0, 0, 255};  // Dark Red
-    Color creditsBackgroundColor = (Color){0, 51, 102, 255};  // Deep Blue
-    Color highScoreBackgroundColor = (Color){204, 85, 0, 255}; // Orange
-    Color pauseBackgroundColor = (Color){64, 64, 64, 255};    // Dark Gray
+    Color gameOverBackgroundColor = (Color){139, 0, 0, 255};  // Dark Red for Game Over
 
     // Back button rectangle
     Rectangle backButton = { screen_width - 150, 20, 120, 40 };
@@ -269,7 +265,8 @@ int main() {
         }
 
         BeginDrawing();
-        if (currentState == MENU || currentState == GAME_OVER) {
+        // Set background color based on game state
+        if (currentState == MENU) {
             ClearBackground(menuBackgroundColor);
         } else if (currentState == PLAYING) {
             if (currentMode == PVP) {
@@ -277,7 +274,11 @@ int main() {
             } else {
                 ClearBackground(pvcBackgroundColor);
             }
+        } else if (currentState == GAME_OVER) {
+            ClearBackground(gameOverBackgroundColor); // Explicitly set dark red for Game Over
         }
+
+        // Draw stars
         for (int i = 0; i < numStars; i++) {
             Color starColor;
             if (currentState == MENU || currentState == GAME_OVER) {
@@ -299,8 +300,11 @@ int main() {
             }
             DrawPixelV(stars[i], starColor);
         }
+
+        // Draw game elements
         if (currentState == MENU) {
-            DrawText("Pong: ", screen_width / 2 - MeasureText("Pong:", 40) / 2, 100, 40, WHITE);
+            // Modified to show full game title
+            DrawText("Pong: Lava vs Ice", screen_width / 2 - MeasureText("Pong: Lava vs Ice", 40) / 2, 100, 40, WHITE);
             DrawText("Select Mode and Level:", screen_width / 2 - MeasureText("Select Mode and Level:", 30) / 2, 200, 30, WHITE);
             DrawText(menuSelection == 0 ? "> PvP Easy" : "PvP Easy", screen_width / 2 - 150, 250, 30, (menuSelection == 0) ? YELLOW : WHITE);
             DrawText(menuSelection == 1 ? "> PvP Medium" : "PvP Medium", screen_width / 2 - 150, 280, 30, (menuSelection == 1) ? YELLOW : WHITE);
