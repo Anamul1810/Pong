@@ -286,15 +286,15 @@ int main() {
             } else if (currentState == PLAYING) {
                 if (currentMode == PVP) {
                     if (stars[i].x < screen_width / 2) {
-                        starColor = Fade((Color){255, 165, 0, 255}, 0.5f);
+                        starColor = Fade((Color){255, 165, 0, 255}, 1.0f);
                     } else {
-                        starColor = Fade((Color){135, 206, 235, 255}, 0.5f);
+                        starColor = Fade((Color){135, 206, 235, 255}, 1.0f);
                     }
                 } else {
                     if (stars[i].x < screen_width / 2) {
-                        starColor = Fade((Color){255, 165, 0, 255}, 0.5f);
+                        starColor = Fade((Color){255, 165, 0, 255}, 1.0f);
                     } else {
-                        starColor = Fade((Color){0, 255, 255, 255}, 0.5f);
+                        starColor = Fade((Color){0, 255, 255, 255}, 1.0f);
                     }
                 }
             }
@@ -346,3 +346,4 @@ int main() {
     CloseWindow();
     return 0;
 }
+
